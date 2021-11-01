@@ -1,6 +1,6 @@
-import React, {useState, useReducer} from 'react';
+import React, {useReducer} from 'react';
 import reducer, {initialState} from './reducers'
-import {addOne, applyNumber, changeOperation, clearDisplay, setMemory, changeMemory, clearMemory} from './actions'
+import {applyNumber, changeOperation, clearDisplay, setMemory, changeMemory, clearMemory} from './actions'
 
 import './App.css';
 
@@ -10,56 +10,12 @@ import CalcButton from './components/CalcButton';
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState)
 
-  // const handleAdd = () => {
-  //   dispatch(addOne())
-  // }
-
-  const handleChange1 = () => {
-    dispatch(applyNumber(1))
+  const handleChange = (number) => {
+    dispatch(applyNumber(number))
   }
 
-  const handleChange2 = () => {
-    dispatch(applyNumber(2))
-  }
-
-  const handleChange3 = () => {
-    dispatch(applyNumber(3))
-  }
-
-  const handleChange4 = () => {
-    dispatch(applyNumber(4))
-  }
-
-  const handleChange5 = () => {
-    dispatch(applyNumber(5))
-  }
-
-  const handleChange6 = () => {
-    dispatch(applyNumber(6))
-  }
-
-  const handleChange7 = () => {
-    dispatch(applyNumber(7))
-  }
-
-  const handleChange8 = () => {
-    dispatch(applyNumber(8))
-  }
-
-  const handleChange9 = () => {
-    dispatch(applyNumber(9))
-  }
-
-  const handleAdd = () => {
-    dispatch(changeOperation('+'));
-  }
-
-  const handleSubtract = () => {
-    dispatch(changeOperation('-'));
-  }
-
-  const handleMultiply = () => {
-    dispatch(changeOperation('*'));
+  const handleOperator = (operator) => {
+    dispatch(changeOperation(operator))
   }
 
   const handleClear = () => {
@@ -67,7 +23,7 @@ function App() {
   }
 
   const handleSetMemory = () => {
-    dispatch(setMemory())
+    dispatch(setMemory(state.total))
   }
 
   const handleChangeMemory = () => {
@@ -101,27 +57,27 @@ function App() {
             </div>
 
             <div className="row">
-              <CalcButton value={1} onClick={handleChange1}/>
-              <CalcButton value={2} onClick={handleChange2}/>
-              <CalcButton value={3} onClick={handleChange3}/>
+              <CalcButton value={1} onClick={() => {handleChange(1)}}/>
+              <CalcButton value={2} onClick={() => {handleChange(2)}}/>
+              <CalcButton value={3} onClick={() => {handleChange(3)}}/>
             </div>
 
             <div className="row">
-              <CalcButton value={4} onClick={handleChange4}/>
-              <CalcButton value={5} onClick={handleChange5}/>
-              <CalcButton value={6} onClick={handleChange6}/>
+              <CalcButton value={4} onClick={() => {handleChange(4)}}/>
+              <CalcButton value={5} onClick={() => {handleChange(5)}}/>
+              <CalcButton value={6} onClick={() => {handleChange(6)}}/>
             </div>
 
             <div className="row">
-              <CalcButton value={7} onClick={handleChange7}/>
-              <CalcButton value={8} onClick={handleChange8}/>
-              <CalcButton value={9} onClick={handleChange9}/>
+              <CalcButton value={7} onClick={() => {handleChange(7)}}/>
+              <CalcButton value={8} onClick={() => {handleChange(8)}}/>
+              <CalcButton value={9} onClick={() => {handleChange(9)}}/>
             </div>
 
             <div className="row">
-              <CalcButton value={"+"} onClick={handleAdd}/>
-              <CalcButton value={"*"} onClick={handleMultiply}/>
-              <CalcButton value={"-"} onClick={handleSubtract}/>
+              <CalcButton value={"+"} onClick={() => {handleOperator('+')}}/>
+              <CalcButton value={"*"} onClick={() => {handleOperator('*')}}/>
+              <CalcButton value={"-"} onClick={() => {handleOperator('-')}}/>
             </div>
 
             <div className="row ce_button">
