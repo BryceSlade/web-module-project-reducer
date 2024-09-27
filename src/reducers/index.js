@@ -1,9 +1,9 @@
-import { ADD_ONE, APPLY_NUMBER, CHANGE_OPERATION } from './../actions';
+import {APPLY_NUMBER, CHANGE_OPERATION, CLEAR_DISPLAY, SET_MEMORY, CHANGE_MEMORY, CLEAR_MEMORY} from './../actions';
 
 export const initialState = {
-    total: 100,
-    operation: "*",
-    memory: 100
+    total: 0,
+    operation: "+",
+    memory: 0
 }
 
 const calculateResult = (num1, num2, operation) => {
@@ -19,11 +19,6 @@ const calculateResult = (num1, num2, operation) => {
 
 const reducer = (state, action) => {
     switch(action.type) {
-        case(ADD_ONE):
-            return({
-                ...state,
-                total: state.total + 1
-            });
 
         case(APPLY_NUMBER):
             return ({ 
@@ -36,6 +31,28 @@ const reducer = (state, action) => {
                 ...state,
                 operation: action.payload
             });
+
+        case(CLEAR_DISPLAY):
+            return ({
+                total: 0,
+                operation: state.operation,
+                memory: 0
+            })
+        case(SET_MEMORY):
+            return ({
+                ...state,
+                memory: action.payload,
+            })
+        case(CHANGE_MEMORY):   //  this is changing my initial memory number to a 
+            return ({          // negative number while subtracting, not working as intended.
+                ...state,
+                memory: calculateResult(state.total, action.payload, state.operation)
+            })
+        case(CLEAR_MEMORY):
+            return ({
+                ...state,
+                memory: 0,
+            })
             
         default:
             return state;
